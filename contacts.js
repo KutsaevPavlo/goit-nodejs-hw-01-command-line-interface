@@ -46,7 +46,7 @@ async function listContacts() {
     }
   }
   
-  async function addContact(name, email, phone) {
+  async function addContact({name, email, phone}) {
     try {
         const data = await listContacts();
         const newContact = {
@@ -57,6 +57,7 @@ async function listContacts() {
           };
           data.push(newContact);
           await fs.writeFile(contactsPath, JSON.stringify(data, null, 2));
+          return newContact;
 
     } catch (error) {
         console.log(error)
